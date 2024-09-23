@@ -1,21 +1,24 @@
-// Nhập model Course để tương tác với cơ sở dữ liệu
 const Course = require("../models/Course");
+const { mutipleMongooseToObject } = require("../../util/mongoose");
 
 class SiteController {
   // [GET] / - Phương thức xử lý yêu cầu GET cho đường dẫn chính
-  async index(req, res) {
+  async index(req, res, next) {
+    console.log("🚀 ~ SiteController ~ index ~ next878787:", next);
     try {
       // Tìm tất cả các khóa học trong cơ sở dữ liệu
-      const courses = await Course.find({}); // Gọi model Course để lấy tất cả bản ghi
-
-      // Log ra console để kiểm tra dữ liệu lấy được
+      let courses = await Course.find({}); // Đổi từ const thành let để có thể gán lại
       console.log(
-        "🚀111111111111111111111111111 ~ SiteController ~ index ~ courses:",
+        "🚀-----------------------113 ~ SiteController ~ index ~ courses:",
         courses
       );
 
-      // Trả về dữ liệu dưới dạng JSON cho client
-      res.json(courses);
+      // Chuyển đổi các đối tượng Mongoose thành đối tượng thuần
+      courses = mutipleMongooseToObject(courses);
+      console.log("🚀 ~ SiteController ~ index ~ courses:", courses);
+
+      // Render trang home với dữ liệu courses
+      res.render("home", { courses });
     } catch (err) {
       // Log lỗi nếu có
       console.log("🚀 ~ SiteController ~ index ~ err:", err);
@@ -27,10 +30,8 @@ class SiteController {
 
   // [GET] /search - Phương thức xử lý yêu cầu GET cho trang tìm kiếm
   search(req, res) {
-    // Render trang tìm kiếm
     res.render("search");
   }
 }
 
-// Xuất controller để có thể sử dụng trong các file khác
 module.exports = new SiteController();

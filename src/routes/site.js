@@ -7,10 +7,10 @@ const siteController = require("../app/controllers/SiteController");
 console.log("3. đây là routes/site.js"); // Log thông báo để xác nhận việc vào file này
 
 // Định nghĩa route cho tìm kiếm
-router.use("/search", siteController.search);
+router.get("/search", siteController.search);
 
 // Định nghĩa route cho trang chính
-router.use("/", siteController.index);
+router.get("/", siteController.index);
 
 // Xuất router để có thể sử dụng trong các file khác
 module.exports = router;
