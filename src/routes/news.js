@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Nhập NewsController để xử lý các yêu cầu liên quan đến tin tức
 const newsController = require("../app/controllers/NewsController");
-console.log("3. đây là routes/news.js"); // Log thông báo để xác nhận việc vào file này
+// Log thông báo để xác nhận việc vào file này
 
 // Đặt tuyến đường cụ thể (slug) trước demo1
 // Định nghĩa route cho /news/demo1

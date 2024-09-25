@@ -7,7 +7,6 @@ async function connectDB() {
     // Kết nối đến cơ sở dữ liệu MongoDB với URI cụ thể
     await mongoose.connect("mongodb://localhost:27017/f8_education_dev", {});
     // Log ra console nếu kết nối thành công
-    console.log("Kết nối thành công đến MongoDB");
   } catch (error) {
     // Log lỗi nếu kết nối thất bại
     console.error("Kết nối MongoDB thất bại:", error);

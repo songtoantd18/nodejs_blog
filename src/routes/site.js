@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Nhập SiteController để xử lý các yêu cầu liên quan đến trang chính
 const siteController = require("../app/controllers/SiteController");
-console.log("3. đây là routes/site.js"); // Log thông báo để xác nhận việc vào file này
+// Log thông báo để xác nhận việc vào file này
 
 // Định nghĩa route cho tìm kiếm
 router.get("/search", siteController.search);
