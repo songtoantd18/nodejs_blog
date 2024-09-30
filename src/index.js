@@ -7,6 +7,7 @@ const path = require("path"); // Nhập thư viện path để xử lý đườn
 const morgan = require("morgan"); // Nhập morgan để ghi log các yêu cầu HTTP
 const route = require("./routes"); // Nhập các route từ file routes
 const db = require("./config/db/index.js"); // Nhập cấu hình kết nối cơ sở dữ liệu
+const methodOverride = require("method-override");
 // Log thông tin về db
 
 // Kết nối đến cơ sở dữ liệu
@@ -20,12 +21,15 @@ app.use(express.static("public")); // Cung cấp các tệp tĩnh từ thư mụ
 app.use(morgan("combined")); // Sử dụng morgan để ghi log thông tin các yêu cầu HTTP
 app.use(express.urlencoded()); // Phân tích dữ liệu URL-encoded
 app.use(express.json()); // Phân tích dữ liệu JSON
-
+app.use(methodOverride("_method"));
 // Sử dụng express-handlebars làm view engine
 app.engine(
   "hbs",
   engine({
     extname: ".hbs", // Đặt phần mở rộng cho tệp view
+    helpers: {
+      sum: (a, b) => a + b,
+    },
   })
 );
 app.set("view engine", "hbs"); // Đặt view engine cho ứng dụng

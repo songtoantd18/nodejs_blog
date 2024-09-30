@@ -21,11 +21,31 @@ class CourseController {
       // Xử lý lỗi
       next(error);
     }
+  } // get /courses/:id/edit
+  async edit(req, res, next) {
+    console.log("số 1 -------------------------");
+    res.render("courses/edit");
+  }
+  async edit(req, res, next) {
+    try {
+      const courses = await Course.findById(req.params.id);
+      res.render("courses/edit", {
+        course: mongooseToObject(courses),
+      });
+    } catch (error) {
+      next(error); // Passes the error to the next middleware (error handler)
+    }
   }
 
   async create(req, res, next) {
     console.log("số 1 -------------------------");
     res.render("courses/create");
+  }
+  // put /courses/:id
+  async update(req, res, next) {
+    Course.updateOne({ _id: req.params.id }, req.body)
+      .then(() => res.redirect("/me/stored/courses"))
+      .catch(next);
   }
   async store(req, res, next) {
     const formData = req.body;

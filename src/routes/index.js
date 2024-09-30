@@ -4,6 +4,7 @@ const coursesRouter = require("./courses");
 const demo1Router = require("./demo1");
 
 const siteRouter = require("./site");
+const meRouter = require("./me");
 
 // Hàm route để định nghĩa các route cho ứng dụng
 function route(app) {
@@ -11,6 +12,7 @@ function route(app) {
 
   // Sử dụng router cho các yêu cầu đến đường dẫn /news
   app.use("/news", newsRouter);
+  app.use("/me", meRouter);
 
   // Sử dụng router cho các yêu cầu đến đường dẫn chính /
   app.use("/courses", coursesRouter);
