@@ -21,6 +21,9 @@
     "url": "https://github.com/songtoantd18/nodejs_blog/issues"
   },
   "homepage": "https://github.com/songtoantd18/nodejs_blog#readme",
+  "lint-staged": {
+  "src/**/*.{js,json,scss,hbs}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"},
+  "beautiful":"lint-staged",
   "description": "",
   "dependencies": {
     "express": "^4.21.0",

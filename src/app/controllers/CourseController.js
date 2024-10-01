@@ -47,6 +47,14 @@ class CourseController {
       .then(() => res.redirect("/me/stored/courses"))
       .catch(next);
   }
+  //delete course
+  async deleteCourse(req, res, next) {
+    Course.deleteOne({ _id: req.params.id })
+      .then(() => {
+        res.redirect("back");
+      })
+      .catch(next);
+  }
   async store(req, res, next) {
     const formData = req.body;
     console.log("🚀 ~ CourseController ~ store ~ formData:", formData);
