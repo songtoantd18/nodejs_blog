@@ -4,7 +4,10 @@ const { mongooseToObject } = require("../../util/mongoose");
 class CourseController {
   // [GET] /course/:slug - Phương thức xử lý yêu cầu GET cho trang chi tiết khóa học
   async show(req, res, next) {
-    console.log("🚀 ~ CourseController ~ show ~ next:", next);
+    console.log(
+      "🚀 -----------------------------------------~ CourseController ~ show ~ next:",
+      next
+    );
     try {
       // Tìm khóa học bằng slug
       const course = await Course.findOne({ slug: req.params.slug });
@@ -49,21 +52,60 @@ class CourseController {
   }
   //delete course
   async deleteCourse(req, res, next) {
+    Course.delete({ _id: req.params.id })
+      .then(() => {
+        res.redirect("back");
+      })
+      .catch(next);
+  }
+  //forceDestroy delete /courses/:id/force  xóa vĩnh viễn
+  async forceDestroy(req, res, next) {
     Course.deleteOne({ _id: req.params.id })
       .then(() => {
         res.redirect("back");
       })
       .catch(next);
   }
+  // retrtore   patch /courses/:id/restore
+  async restore(req, res, next) {
+    Course.restore({ _id: req.params.id })
+      .then(() => {
+        res.redirect("back");
+      })
+      .catch(next);
+  }
+  // async store(req, res, next) {
+  //   const formData = req.body;
+  //   console.log("🚀 ~ CourseController ~ store ~ formData:", formData);
+  //   formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`; // Đảm bảo sử dụng dấu ` để chèn giá trị videoId
+  //   const course = new Course(formData); // Tạo thể hiện mới từ Course
+
+  //   try {
+  //     await course.save();
+
+  //     .then(()=>res.redirect('me/stored/courses'));
+  //     // Lưu course vào cơ sở dữ liệu
+
+  //   } catch (error) {
+  //     next(error); // Gọi hàm next để xử lý lỗi
+  //   }
+  // }
+
   async store(req, res, next) {
     const formData = req.body;
     console.log("🚀 ~ CourseController ~ store ~ formData:", formData);
-    formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`; // Đảm bảo sử dụng dấu ` để chèn giá trị videoId
-    const course = new Course(formData); // Tạo thể hiện mới từ Course
+
+    // Chèn giá trị videoId vào đường dẫn hình ảnh
+    formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
+
+    // Tạo thể hiện mới từ Course
+    const course = new Course(formData);
 
     try {
-      await course.save(); // Lưu course vào cơ sở dữ liệu
-      res.send("Course saved successfully");
+      // Lưu khóa học vào cơ sở dữ liệu
+      await course.save();
+      // Chuyển hướng sau khi lưu thành công
+      res.redirect("/me/stored/courses");
     } catch (error) {
       next(error); // Gọi hàm next để xử lý lỗi
     }

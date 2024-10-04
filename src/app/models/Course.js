@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const slug = require("mongoose-slug-generator");
-mongoose.plugin(slug); // Kích hoạt slug generator
+var mongooseDelete = require("mongoose-delete");
 
 const CourseSchema = new Schema(
   {
@@ -14,5 +14,10 @@ const CourseSchema = new Schema(
   },
   { timestamps: true }
 );
+mongoose.plugin(slug); // Kích hoạt slug generator
 
+CourseSchema.plugin(mongooseDelete, {
+  deletedAt: true,
+  overrideMethods: "all",
+});
 module.exports = mongoose.model("Course", CourseSchema);

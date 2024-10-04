@@ -10,12 +10,15 @@ router.post("/store", courseController.store);
 router.get("/:id  /edit", courseController.edit);
 router.put("/:id", courseController.update);
 
+router.patch("/:id/restore", courseController.restore);
+
 router.get(
   "/:slug",
 
   courseController.show
 );
 router.delete("/:id", courseController.deleteCourse);
+router.delete("/:id/force", courseController.forceDestroy);
 
 // Xuất router để có thể sử dụng trong các file khác
 module.exports = router;

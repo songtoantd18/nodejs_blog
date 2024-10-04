@@ -22,14 +22,16 @@
   },
   "homepage": "https://github.com/songtoantd18/nodejs_blog#readme",
   "lint-staged": {
-  "src/**/*.{js,json,scss,hbs}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"},
-  "beautiful":"lint-staged",
+    "src/**/*.{js,json,scss,hbs}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+  },
+  "beautiful": "lint-staged",
   "description": "",
   "dependencies": {
     "express": "^4.21.0",
     "express-handlebars": "^8.0.1",
     "method-override": "^3.0.0",
     "mongoose": "^8.6.3",
+    "mongoose-delete": "^1.0.2",
     "mongoose-slug-generator": "^1.0.4"
   },
   "devDependencies": {
