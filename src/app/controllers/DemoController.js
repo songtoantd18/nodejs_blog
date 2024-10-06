@@ -4,11 +4,9 @@ const { mongooseToObject } = require("../../util/mongoose");
 class DemoController {
   // [GET] /course/:slug - Phương thức xử lý yêu cầu GET cho trang chi tiết khóa học
   async show(req, res, next) {
-    console.log("🚀 ~ DemoController ~ show ~ next:", next);
     try {
       // Tìm khóa học bằng slug
       const course = await Course.findOne({ slug: req.params.slug });
-      console.log("🚀 ~ DemoController ~ show ~ course:", course);
 
       // Nếu tìm thấy khóa học, render trang detail và truyền dữ liệu khóa học
       if (course) {

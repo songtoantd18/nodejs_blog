@@ -4,14 +4,9 @@ const { mongooseToObject } = require("../../util/mongoose");
 class CourseController {
   // [GET] /course/:slug - Phương thức xử lý yêu cầu GET cho trang chi tiết khóa học
   async show(req, res, next) {
-    console.log(
-      "🚀 -----------------------------------------~ CourseController ~ show ~ next:",
-      next
-    );
     try {
       // Tìm khóa học bằng slug
       const course = await Course.findOne({ slug: req.params.slug });
-      console.log("🚀 ~ CourseController ~ show ~ course:", course);
 
       // Nếu tìm thấy khóa học, render trang detail và truyền dữ liệu khóa học
       if (course) {
@@ -26,7 +21,6 @@ class CourseController {
     }
   } // get /courses/:id/edit
   async edit(req, res, next) {
-    console.log("số 1 -------------------------");
     res.render("courses/edit");
   }
   async edit(req, res, next) {
@@ -41,7 +35,6 @@ class CourseController {
   }
 
   async create(req, res, next) {
-    console.log("số 1 -------------------------");
     res.render("courses/create");
   }
   // put /courses/:id
@@ -74,26 +67,9 @@ class CourseController {
       })
       .catch(next);
   }
-  // async store(req, res, next) {
-  //   const formData = req.body;
-  //   console.log("🚀 ~ CourseController ~ store ~ formData:", formData);
-  //   formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`; // Đảm bảo sử dụng dấu ` để chèn giá trị videoId
-  //   const course = new Course(formData); // Tạo thể hiện mới từ Course
-
-  //   try {
-  //     await course.save();
-
-  //     .then(()=>res.redirect('me/stored/courses'));
-  //     // Lưu course vào cơ sở dữ liệu
-
-  //   } catch (error) {
-  //     next(error); // Gọi hàm next để xử lý lỗi
-  //   }
-  // }
 
   async store(req, res, next) {
     const formData = req.body;
-    console.log("🚀 ~ CourseController ~ store ~ formData:", formData);
 
     // Chèn giá trị videoId vào đường dẫn hình ảnh
     formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;

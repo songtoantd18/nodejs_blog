@@ -8,7 +8,6 @@ class SiteController {
       // Tìm tất cả các khóa học trong cơ sở dữ liệu
       let courses = await Course.find({});
       // Đổi từ const thành let để có thể gán lại
-      console.log("🚀 ~ SiteController ~ index ~ courses:", courses);
 
       // Chuyển đổi các đối tượng Mongoose thành đối tượng thuần
       courses = mutipleMongooseToObject(courses);
